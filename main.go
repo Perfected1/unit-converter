@@ -11,67 +11,65 @@ import (
 )
 
 func main() {
-	// Reader to capture user input from the terminal
 	reader := bufio.NewReader(os.Stdin)
 
-	// Infinite loop so the program keeps running until user exits
 	for {
-		// Display menu options
-		fmt.Println("\n=== UNIT CONVERTER ===")
-		fmt.Println("1. Kg → Lbs")
-		fmt.Println("2. Lbs → Kg")
-		fmt.Println("3. Km → Miles")
-		fmt.Println("4. Miles → Km")
+		fmt.Println("\n===== UNIT CONVERTER =====")
+		fmt.Println("1. Kilograms → Pounds")
+		fmt.Println("2. Pounds → Kilograms")
+		fmt.Println("3. Kilometers → Miles")
+		fmt.Println("4. Miles → Kilometers")
 		fmt.Println("5. Liters → Gallons")
 		fmt.Println("6. Gallons → Liters")
 		fmt.Println("0. Exit")
 		fmt.Print("Choose an option: ")
 
-		// Read menu choice from user
-		choiceStr, _ := reader.ReadString('\n')
-		choiceStr = strings.TrimSpace(choiceStr)
+		input, _ := reader.ReadString('\n')
+		input = strings.TrimSpace(input)
 
-		// Convert input string to integer
-		choice, err := strconv.Atoi(choiceStr)
+		choice, err := strconv.Atoi(input)
 		if err != nil {
-			fmt.Println("Invalid input. Please enter a number between 0-6.")
+			fmt.Println("Please enter a valid number.")
 			continue
 		}
 
-		// Exit condition
 		if choice == 0 {
 			fmt.Println("Goodbye 👋")
 			break
 		}
 
-		// Ask user for the value to convert
 		fmt.Print("Enter value: ")
-		valueStr, _ := reader.ReadString('\n')
-		valueStr = strings.TrimSpace(valueStr)
+		valueInput, _ := reader.ReadString('\n')
+		valueInput = strings.TrimSpace(valueInput)
 
-		// Convert input string to float
-		value, err := strconv.ParseFloat(valueStr, 64)
+		value, err := strconv.ParseFloat(valueInput, 64)
 		if err != nil {
-			fmt.Println("Invalid number input. Try again.")
+			fmt.Println("Invalid number input.")
 			continue
 		}
 
-		// Perform conversion based on selected option
 		switch choice {
+
 		case 1:
-			fmt.Println("Result:", converter.KgToLbs(value))
+			fmt.Println("Result:", converter.KgToLbs(value), "lbs")
+
 		case 2:
-			fmt.Println("Result:", converter.LbsToKg(value))
+			fmt.Println("Result:", converter.LbsToKg(value), "kg")
+
 		case 3:
-			fmt.Println("Result:", converter.KmToMiles(value))
+			fmt.Println("Result:", converter.KmToMiles(value), "miles")
+
 		case 4:
-			fmt.Println("Result:", converter.MilesToKm(value))
+			fmt.Println("Result:", converter.MilesToKm(value), "km")
+
 		case 5:
-			fmt.Println("Result:", converter.LitersToGallons(value))
+			fmt.Println("Result:", converter.LitersToGallons(value), "gallons")
+
 		case 6:
-			fmt.Println("Result:", converter.GallonsToLiters(value))
+			fmt.Println("Result:", converter.GallonsToLiters(value), "liters")
+
 		default:
-			fmt.Println("Invalid option selected.")
+			fmt.Println("Invalid option. Please choose between 0–6.")
 		}
 	}
 }
