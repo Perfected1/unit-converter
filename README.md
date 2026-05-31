@@ -34,10 +34,11 @@ unit-converter/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/unit-converter.git
+git clone https://github.com/Perfected1/unit-converter.git
 cd unit-converter
 2. Run the application
 go run main.go
+
 📌 Usage Example
 ===== UNIT CONVERTER =====
 1. Kilograms → Pounds
@@ -58,8 +59,8 @@ CLI input handling
 Type conversion
 Control flow (switch, loops)
 Error handling
-👨‍💻 Author
 
+👨‍💻 Author
 Chike Jerry Nnamadim
 
 📜 License
