@@ -11,9 +11,11 @@ import (
 )
 
 func main() {
+	// Reader for handling user input from terminal
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
+		// Display menu options
 		fmt.Println("\n===== UNIT CONVERTER =====")
 		fmt.Println("1. Kilograms → Pounds")
 		fmt.Println("2. Pounds → Kilograms")
@@ -24,52 +26,63 @@ func main() {
 		fmt.Println("0. Exit")
 		fmt.Print("Choose an option: ")
 
-		input, _ := reader.ReadString('\n')
-		input = strings.TrimSpace(input)
+		// Read user menu selection
+		input := readInput(reader)
 
+		// Convert menu input to integer
 		choice, err := strconv.Atoi(input)
 		if err != nil {
-			fmt.Println("Please enter a valid number.")
+			fmt.Println("Invalid input. Please enter a number between 0–6.")
 			continue
 		}
 
+		// Exit condition
 		if choice == 0 {
 			fmt.Println("Goodbye 👋")
 			break
 		}
 
+		// Ask user for value to convert
 		fmt.Print("Enter value: ")
-		valueInput, _ := reader.ReadString('\n')
-		valueInput = strings.TrimSpace(valueInput)
+		valueInput := readInput(reader)
 
+		// Convert value input to float
 		value, err := strconv.ParseFloat(valueInput, 64)
 		if err != nil {
-			fmt.Println("Invalid number input.")
+			fmt.Println("Invalid number. Please try again.")
 			continue
 		}
 
+		// Perform conversion based on selected option
 		switch choice {
 
 		case 1:
-			fmt.Println("Result:", converter.KgToLbs(value), "lbs")
+			fmt.Printf("Result: %.4f lbs\n", converter.KgToLbs(value))
 
 		case 2:
-			fmt.Println("Result:", converter.LbsToKg(value), "kg")
+			fmt.Printf("Result: %.4f kg\n", converter.LbsToKg(value))
 
 		case 3:
-			fmt.Println("Result:", converter.KmToMiles(value), "miles")
+			fmt.Printf("Result: %.4f miles\n", converter.KmToMiles(value))
 
 		case 4:
-			fmt.Println("Result:", converter.MilesToKm(value), "km")
+			fmt.Printf("Result: %.4f km\n", converter.MilesToKm(value))
 
 		case 5:
-			fmt.Println("Result:", converter.LitersToGallons(value), "gallons")
+			fmt.Printf("Result: %.4f gallons\n", converter.LitersToGallons(value))
 
 		case 6:
-			fmt.Println("Result:", converter.GallonsToLiters(value), "liters")
+			fmt.Printf("Result: %.4f liters\n", converter.GallonsToLiters(value))
 
+		// Handles invalid menu choices (e.g. 9, 99, -1)
 		default:
-			fmt.Println("Invalid option. Please choose between 0–6.")
+			fmt.Println("Invalid option. Please select a number between 0–6.")
 		}
 	}
+}
+
+// readInput handles all user input and trims unnecessary spaces/newlines
+func readInput(reader *bufio.Reader) string {
+	input, _ := reader.ReadString('\n')
+	return strings.TrimSpace(input)
 }
